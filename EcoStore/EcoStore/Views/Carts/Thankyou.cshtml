@@ -1,0 +1,180 @@
+﻿@model List<EcoStore.ViewModels.OrderViewModel>
+@{
+    ViewBag.Title = "Thankyou";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    decimal subtotal = 0;
+}
+<link rel="preload" href="~/Content/FrontendAssets/other_assets/css/styled3c7.css" as="style">
+<link rel="stylesheet" type="text/css" href="~/Content/FrontendAssets/other_assets/css/swiper-bundle.min.css" />
+<link rel="stylesheet" type="text/css" href="~/Content/FrontendAssets/other_assets/css/styled3c7.css">
+
+<div class="container">
+    <div class="page-content bg-white py-3 mb-5">
+        <div class="row my-md-0 my-4 pt-md-0 pt-3">
+            <div class="col-md-6 ml-auto">
+                @foreach (var item in Model)
+                {
+                <h2 class="page-heading">Thank you @item.FirstName @item.LastName</h2>
+
+                    <p class="font16">Order# <strong>@item.OrderId</strong></p>
+                    <p class="font13 border-bottom pb-4"></p>
+                    <ul class="thank-you-order-details order_details list-inline my-4 nav text-uppercase">
+                        <li class="order mb-2  mr-2"> Order Number: <br><strong>@item.OrderId</strong></li>
+                        <li class="date mb-2 mr-2">
+                            Date: <br>
+                            <strong> @item.OrderDate </strong>
+                        </li>
+                        <li class="total mb-2 mr-2">
+                            Total: <br><strong>Rs. @item.Price</strong>
+                        </li>
+                        <li class="method mb-2 mr-2">
+                            Payment Method: <br><strong>Cash On Delivery</strong>
+                        </li>
+                    </ul>
+                    <p class="font13 border-top pt-4">
+                        You will pay cash when delivery rider hands over the parcel at your door step
+                    </p>
+                    <br />
+                    <h6 class="page-heading mt-3">User Details</h6>
+                    <table class="table table-bordered" style="color:#000000;">
+                        <tr>
+                            <th>Name</th>
+                            <td>@item.FirstName @item.LastName</td>
+                        </tr>
+                        <tr>
+                            <th>Contact</th>
+                            <td>@item.Phone</td>
+                        </tr>
+                        <tr>
+                            <th>Shipping Address</th>
+                            <td>@item.Address</td>
+                        </tr>
+                    </table>
+                    subtotal += (decimal)item.Qty * (decimal)item.Price;
+                }
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h6 class="page-heading">Track Your Order</h6>
+                        <div class="border-box pb-5">
+                            <div class="row">
+                                <div class="col-md-12 col-12">
+                                    <form action="https://www.shashkay.com.pk/track-your-order" method="post"
+                                          id="tracking-form">
+                                        <div class="row">
+                                            <div class="col-md-12 col-xs-12">
+                                                <div class="form-group">
+                                                    <label for="order_no">
+                                                        <span class="text-danger">*</span> Order No
+                                                    </label>
+                                                    <input name="order_no" required class="form-control rounded-0" placeholder="Order Number">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-xs-12">
+                                                <div class="form-group">
+                                                    <label for="phone">
+                                                        <span class="text-danger">*</span> Email/Mobile
+                                                    </label>
+                                                    <input type="text" name="phone" required class="form-control mobile rounded-0" placeholder="Your Email/Mobile">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-xs-12">
+                                                <div class="form-group">
+                                                    <button type="submit" name="submit" class="btn bg-primary float-right px-3 rounded-0"> Submit </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <h6 class="page-heading mt-2">Contact us</h6>
+                        <div class="border-box  box-detail">
+                            <ul class="list-unstyled">
+                                <li class="mt-2 text-capitalize" style="color:#000000;">
+                                    <span class="font-weight-bold">SMS/Whatsapp:</span><br />
+                                    <a href="https://api.whatsapp.com/send?phone=923440009477" target="_blank" rel="noopener" class="text-dark">+92-344-000-9477</a> <br />
+                                </li>
+                                <li class="mt-2 text-capitalize" style="color:#000000;">
+                                    <span class="font-weight-bold">Landline:</span><br />
+                                    <a href="tel:03440009477" rel="noopener" " class=" text-dark">034400009477</a>
+                                </li>
+                                <li class="mt-2" style="color:#000000;">
+                                    <span class="font-weight-bold">Email:</span><br>
+                                    <a href="mailto:najeebullahbrohi413@gmail.com" class="text-dark">
+                                        najeebullahbrohi413@gmail.com
+                                    </a>
+                                </li>
+                                <li class="mt-2 text-capitalize" style="color:#000000;">
+                                    <span class="font-weight-bold">Address:</span><br>
+                                    Gulshan-e-Iqbal Block 18, Karachi City, Sindh 75100.
+                                </li>
+                                <li class="mt-2 mb-2 text-capitalize" style="color:#000000;">
+                                    <span class="font-weight-bold">Working days/hours:</span><br>
+                                    Mon - Sat / 11:00AM - 6:00PM
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 mr-auto">
+                <div class="row mt-5 mb-4">
+                    <div class="col-12 mt-2">
+                        <h6 class="page-heading ">
+                            Order Details
+                            @*<a class="btn bg-primary float-right btn-sm px-3 rounded-0" href="#">ORDER INVOICE</a>*@
+                            <a class="btn bg-primary float-right btn-sm px-3 rounded-0" href="@Url.Action("Index","Home")">CONTINUE SHOPPING</a>
+                        </h6>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-12 ">
+                        <table class="table table-bordered " style="color:#000000;">
+                            <thead>
+                                <tr>
+                                    <th class="product-name text-center" colspan="2">Product</th>
+                                    <th class="product-total text-center">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="order_item">
+                                        <td class="product-name" width="80">
+                                            <a href="#">
+                                                <img class="img-fluid" src="@Url.Content(item.ImgPath)" alt="">
+                                            </a>
+                                        </td>
+                                        <td class="product-name align-middle">
+                                            @item.ProductName <strong> x @item.Qty</strong><br>
+                                        </td>
+                                        <td class="product-total  align-middle"> Rs. @item.Price</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th class="text-right" colspan="2">Sub Total:</th>
+                                    <td class="text-center"><strong>Rs. @subtotal</strong></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-right" colspan="2">Delivery Charges:</th>
+                                    <td class="text-center"><strong>Free</strong></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-right" colspan="2">Net Invoice Total:</th>
+                                    <td class="text-center"><strong>Rs. @subtotal</strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

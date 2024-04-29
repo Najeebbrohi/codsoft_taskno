@@ -1,0 +1,178 @@
+﻿
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Begin Li's Breadcrumb Area -->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Checkout</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!--Checkout Area Strat-->
+@using (Html.BeginForm("PlaceOrder", "Carts", FormMethod.Post))
+{
+    {
+        var cartItem = Session["Cart"] as List<EcoStore.ViewModels.CartViewModel>;
+        <div class="checkout-area pt-60 pb-30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <form action="#">
+                            <div class="checkbox-form">
+                                <h3>Billing Details</h3>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="country-select clearfix">
+                                            <label>Country <span class="required">*</span></label>
+                                            <select class="nice-select wide" name="Country">
+                                                <option value="Pakistan" data-display="Pakistan">Pakistan</option>
+                                                <option value="Bangladesh">Bangladesh</option>
+                                                <option value="London">London</option>
+                                                <option value="Romania">Romania</option>
+                                                <option value="French">French</option>
+                                                <option value="Germany">Germany</option>
+                                                <option value="Australia">Australia</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="checkout-form-list">
+                                            <label>First Name <span class="required">*</span></label>
+                                            <input placeholder="First Name" type="text" name="FirstName" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="checkout-form-list">
+                                            <label>Last Name <span class="required">*</span></label>
+                                            <input placeholder="Last Name" type="text" name="LastName" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list">
+                                            <label>Address <span class="required">*</span></label>
+                                            <input placeholder="Street address" type="text" name="Address" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list">
+                                            <label>Town / City <span class="required">*</span></label>
+                                            <input type="text" placeholder="City" name="City" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="checkout-form-list">
+                                            <label>State <span class="required">*</span></label>
+                                            <input placeholder="State" type="text" name="State" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="checkout-form-list">
+                                            <label>Postcode / Zip</label>
+                                            <input placeholder="Postcode / Zip" type="text" name="ZipCode">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="checkout-form-list">
+                                            <label>Email Address <span class="required">*</span></label>
+                                            <input placeholder="Email" type="email" name="Email" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="checkout-form-list">
+                                            <label>Phone  <span class="required">*</span></label>
+                                            <input type="text" placeholder="Phone" name="Phone" required="required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="different-address">
+                                    <div class="order-notes">
+                                        <div class="checkout-form-list">
+                                            <label>Order Notes</label>
+                                            <textarea name="Note" id="checkout-mess" cols="30" rows="10" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="your-order">
+                            <h3>Your order</h3>
+                            @if (cartItem != null)
+                            {
+                                <div class="your-order-table table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="cart-product-name">Product</th>
+                                                <th class="cart-product-total">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in cartItem)
+                                            {
+                                                <tr class="cart_item">
+                                                    <td class="cart-product-name"> @item.ProductName<strong class="product-quantity"> × @item.Qty</strong></td>
+                                                    <td class="cart-product-total"><span class="amount">Rs. @item.Price</span></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                        <tfoot>
+                                            <tr class="cart-subtotal">
+                                                <th>Cart Subtotal</th>
+                                                <td><span class="amount">Rs. @(cartItem.Sum(x => x.Qty * x.Price))</span></td>
+                                            </tr>
+                                            <tr class="order-total">
+                                                <th>Order Total</th>
+                                                <td><strong><span class="amount">Rs. @(cartItem.Sum(x => x.Qty * x.Price))</span></strong></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            }
+                            else
+                            {
+                                <p>Your cart is empty.</p>
+                            }
+
+                            <div class="payment-method">
+                                <div class="payment-accordion">
+                                    <div class="payment-method">
+                                        <h3>Payment Method</h3>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="Payment" value="Cash" style="height: auto;" checked>
+                                            <label class="form-check-label"> Cash on Delivery</label>
+                                        </div>
+                                        @*<div class="form-check">
+                                            <input class="form-check-input" type="radio" name="Payment" value="Stripe" id="stripePayment" style="height: auto;">
+                                            <label class="form-check-label"> Stripe </label>
+                                        </div>*@
+                                    </div>
+                                    <br />
+                                    <div class="order-button-payment">
+                                        @if (cartItem != null)
+                                        {
+                                            <button type="submit" class="btn btn-warning btn-block" style="background-color: #e80f0f !important; color: #fff;">Place Order</button>
+                                        }
+                                        else
+                                        {
+                                            <button type="submit" class="btn btn-warning btn-block" disabled style="cursor:not-allowed;" style="background-color: #e80f0f !important;">Place Order</button>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

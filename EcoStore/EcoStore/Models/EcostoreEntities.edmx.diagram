@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="639cfa20984f45ca878bb064630865f9" Name="Diagram1">
+        <EntityTypeShape EntityType="EcostoreModel.Banner" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcostoreModel.Brand" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcostoreModel.Category" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcostoreModel.Color" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcostoreModel.OrderDetail" Width="1.5" PointX="7.5" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcostoreModel.Order" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcostoreModel.Product" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcostoreModel.Role" Width="1.5" PointX="7.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcostoreModel.Size" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcostoreModel.Sub_categories" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcostoreModel.User" Width="1.5" PointX="10" PointY="11.125" IsExpanded="true" />
+        <AssociationConnector Association="EcostoreModel.FK_Banners_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="EcostoreModel.FK_Products_Brands" ManuallyRouted="false" />
+        <AssociationConnector Association="EcostoreModel.FK_Sub_categories_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="EcostoreModel.FK_Products_Colors" ManuallyRouted="false" />
+        <AssociationConnector Association="EcostoreModel.FK_OrderDetails_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="EcostoreModel.FK_OrderDetails_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="EcostoreModel.FK_Products_Sizes" ManuallyRouted="false" />
+        <AssociationConnector Association="EcostoreModel.FK_Products_Sub_categories" ManuallyRouted="false" />
+        <AssociationConnector Association="EcostoreModel.FK_Users_Roles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EcostoreModel.Gallery" Width="1.5" PointX="7.5" PointY="5" />
+        <AssociationConnector Association="EcostoreModel.FK_Galleries_Products" />
+        <EntityTypeShape EntityType="EcostoreModel.Contact" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EcostoreModel.Rating" Width="1.5" PointX="7.5" PointY="14.75" />
+        <AssociationConnector Association="EcostoreModel.FK_Ratings_Products" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

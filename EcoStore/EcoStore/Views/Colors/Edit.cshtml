@@ -1,0 +1,62 @@
+﻿@model EcoStore.Models.Color
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Breadcubs Area Start Here -->
+<div class="breadcrumbs-area">
+    <ul>
+        <li>
+            <a href="/Admin/Index">Home</a>
+        </li>
+        <li>Color</li>
+    </ul>
+</div>
+<!-- Breadcubs Area End Here -->
+<!-- Add New Teacher Area Start Here -->
+<div class="card height-auto">
+    <div class="card-body">
+        <div class="heading-layout1">
+            <div class="item-title">
+                <h3>Color</h3>
+            </div>
+            @{
+                if (@ViewBag.Msg != null)
+                {
+                    <div class="alert alert-success">@ViewBag.Msg</div>
+                }
+                if (@ViewBag.ErrorMsg != null)
+                {
+                    <div class="alert alert-danger">@ViewBag.ErrorMsg</div>
+                }
+            }
+        </div>
+        @using (Html.BeginForm("Edit", "Colors", FormMethod.Post, new { enctype = "multipart/form-data", @class = "new-added-form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(x=>x.ColorId)
+            <div class="row">
+                <div class="col-xl-4 col-lg-6 col-12 form-group">
+                    <label>Color Name</label>
+                    @Html.EditorFor(m => m.ColorName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Color Name" } })
+                </div>
+                <div class="col-xl-4 col-lg-6 col-12 form-group">
+                    <label>Color Code</label>
+                    @Html.EditorFor(m => m.ColorCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Color Code" } })
+                </div>
+                <div class="col-12 form-group mg-t-8">
+                    <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Update</button>
+                    <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

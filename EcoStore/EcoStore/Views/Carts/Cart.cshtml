@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Begin Li's Breadcrumb Area -->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Shopping Cart</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!--Shopping Cart Area Strat-->
+@{var cartItems = Session["Cart"] as List<EcoStore.ViewModels.CartViewModel>;
+
+
+<div class="Shopping-cart-area pt-60 pb-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    @using (Html.BeginForm("Update", "Carts", FormMethod.Post))
+                    {
+                        <div class="table-content table-responsive">
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="li-product-remove">remove</th>
+                                        <th class="li-product-thumbnail">images</th>
+                                        <th class="cart-product-name">Product</th>
+                                        <th class="li-product-price">Unit Price</th>
+                                        <th class="li-product-quantity">Quantity</th>
+                                        <th class="li-product-subtotal">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (cartItems != null)
+                                    {
+                                        foreach (var item in cartItems)
+                                        {
+                                            <tr>
+                                                <td class="li-product-remove"><a href="javascript:void(0)"><i class="fa fa-times" onclick="removeFromCart('@item.ProductId')"></i></a></td>
+                                                <td class="li-product-thumbnail"><a href="#"><img src="@Url.Content(item.ImgPath)" class="img-responsive" style="width: 100px;"></a></td>
+                                                <td class="li-product-name"><a href="#">@item.ProductName</a></td>
+                                                <td class="li-product-price"><span class="amount">Rs. @item.Price</span></td>
+                                                <td class="quantity">
+                                                    <label>Quantity</label>
+                                                    <div class="cart-plus-minus">
+                                                        <input class="cart-plus-minus-box" name="Qty" type="text" min="1" value="@item.Qty">
+                                                        <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
+                                                        <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
+                                                    </div>
+                                                </td>
+                                                @{ var totalprice = item.Qty * item.Price;
+                                                    <td class="product-subtotal"><span class="amount">Rs. @totalprice</span></td>
+                                                }
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="6"><h6>Your Cart is empty</h6><br /><a href="@Url.Action("Index","Home")" class="btn btn-success">Continue Shopping</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="coupon-all">
+                                    <div class="coupon2">
+                                        <input class="button" name="update_cart" value="Update cart" type="submit">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    } <!--Form end here-->
+                    <div class="row">
+                        <div class="col-md-5 ml-auto">
+                            <div class="cart-page-total">
+                                <h2>Cart totals</h2>
+                                <ul>
+                                    <li>Subtotal <span>Rs. @(cartItems != null ? cartItems.Sum(x => x.Qty * x.Price) : 0)</span></li>
+                                    <li>Total <span>Rs. @(cartItems != null ? cartItems.Sum(x => x.Qty * x.Price) : 0)</span></li>
+                                </ul>
+                                <a href="@Url.Action("Checkout","Carts")">Proceed to checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!--Shopping Cart Area End-->
+<script>
+    function removeFromCart(productId) {
+        $.ajax({
+            url: '@Url.Action("RemoveFromCart", "Home")',
+            type: 'POST',
+            data: { productId: productId },
+            success: function (result) {
+                location.reload();
+            }
+        });
+    }
+    $(document).ready(function () {
+        // Event listener ke through input ko monitor karna
+        $('.cart-plus-minus-box').on('input', function () {
+            // Input field ki value ko integer mein convert karna
+            var quantity = parseInt($(this).val());
+
+            // Agar quantity negative hai ya NaN (Not a Number) hai, to use default value set karna
+            if (quantity <= 0 || isNaN(quantity)) {
+                $(this).val(1); // Default value agar zero ya negative value enter ki gayi ho
+                
+            }
+        });
+    });
+</script>

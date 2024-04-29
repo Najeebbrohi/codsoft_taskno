@@ -1,0 +1,103 @@
+﻿@model EcoStore.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Breadcubs Area Start Here -->
+<div class="breadcrumbs-area">
+    <ul>
+        <li>
+            <a href="index.html">Home</a>
+        </li>
+        <li>Product Details</li>
+    </ul>
+</div>
+<!-- Breadcubs Area End Here -->
+<!-- Student Details Area Start Here -->
+<div class="card height-auto">
+    <div class="card-body">
+        <div class="heading-layout1">
+            <div class="item-title">
+                <h3>Product Details</h3>
+            </div>
+        </div>
+        <div class="single-info-details">
+            <div class="item-img">
+                @if (Url.Content(Model.ImgPath) != null)
+                {
+                    <img src="@Url.Content(Model.ImgPath)" style="width: 100px;" />
+                }
+            </div>
+            <div class="item-content">
+                <div class="header-inline item-header">
+                    <h3 class="text-dark-medium font-medium">@Html.DisplayFor(model => model.ProductName)</h3>
+                    <div class="header-elements">
+                        <ul>
+                            <li><a href="@Url.Action("Edit","Products", new { id = Model.ProductId})"><i class="far fa-edit"></i></a></li>
+                            <li><a href="#"><i class="fas fa-print"></i></a></li>
+                            <li><a href="#"><i class="fas fa-download"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-table table-responsive">
+                    <table class="table text-nowrap">
+                        <tbody>
+                            <tr>
+                                <td>Product Name:</td>
+                                <td class="font-medium text-dark-medium">
+                                    @Html.DisplayFor(model => model.ProductName)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Price:</td>
+                                <td class="font-medium text-dark-medium">
+                                    @Html.DisplayFor(model => model.Price)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sub Category:</td>
+                                <td class="font-medium text-dark-medium">
+                                    @Html.DisplayFor(model => model.Sub_categories.Name)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Brand:</td>
+                                <td class="font-medium text-dark-medium">
+                                    @Html.DisplayFor(model => model.Brand.Name)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Color:</td>
+                                <td class="font-medium text-dark-medium">
+                                    @Html.DisplayFor(model => model.Color.ColorName)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Size:</td>
+                                <td class="font-medium text-dark-medium">
+                                    @Html.DisplayFor(model => model.Size.Name)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Short Description:</td>
+                                <td class="font-medium text-dark-medium">
+                                    @Html.DisplayFor(model => model.ShortDescription)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Long Description:</td>
+                                <td class="font-medium text-dark-medium">
+                                    @Html.DisplayFor(model => model.LongDescription)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="@Url.Action("Index","Products")">Back to List</a>
+</div>

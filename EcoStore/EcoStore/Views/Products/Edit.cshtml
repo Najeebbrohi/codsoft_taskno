@@ -1,0 +1,168 @@
+﻿@model EcoStore.ViewModels.ProductViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Breadcubs Area Start Here -->
+<div class="breadcrumbs-area">
+    <ul>
+        <li>
+            <a href="/Admin/Index">Home</a>
+        </li>
+        <li>Product</li>
+    </ul>
+</div>
+<!-- Breadcubs Area End Here -->
+<!-- Add New Teacher Area Start Here -->
+<div class="card height-auto">
+    <div class="card-body">
+        <div class="heading-layout1">
+            <div class="item-title">
+                <h3>Product</h3>
+            </div>
+            @{
+                if (@ViewBag.Msg != null)
+                {
+                    <div class="alert alert-success">@ViewBag.Msg</div>
+                }
+                if (@ViewBag.ErrorMsg != null)
+                {
+                    <div class="alert alert-danger">@ViewBag.ErrorMsg</div>
+                }
+            }
+        </div>
+        @using (Html.BeginForm("Edit", "Products", FormMethod.Post, new { enctype = "multipart/form-data", @class = "new-added-form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(x => x.ProductId)
+    <div class="row">
+        <div class="col-xl-4 col-lg-6 col-12 form-group">
+            <label>Product Name</label>
+            @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-xl-4 col-lg-6 col-12 form-group">
+            <label>Price</label>
+            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-xl-4 col-lg-6 col-12 form-group">
+            <label>Sub Category</label>
+            @Html.DropDownList("SubCategoryId", null, "Select Sub Category", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SubCategoryId, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <label>Brand</label>
+            @Html.DropDownList("BrandId", null, "Select Brand", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.BrandId, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <label>Color</label>
+            @Html.DropDownList("ColorId", null, "Select Color", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ColorId, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <label>Size</label>
+            @Html.DropDownList("SizeId", null, "Select Size", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SizeId, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <label>Product Rating</label>
+            @Html.EditorFor(model => model.ProductRating, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ProductRating, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-xl-2 col-lg-2 col-12 form-group">
+            <label>Qty</label>
+            @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Qty, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-xl-2 col-lg-2 col-12 form-group">
+            <label>Hot</label>
+            @if (Model.HotProducts == true)
+            {
+                @Html.CheckBox("HotProducts", true, new { htmlAttributes = new { @class = "form-control" } })
+            }
+            else
+            {
+                @Html.CheckBox("HotProducts", false, new { htmlAttributes = new { @class = "form-control" } })
+            }
+            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-xl-2 col-lg-2 col-12 form-group">
+            <label>New Arrival</label>
+            @if (Model.NewArrivals == true)
+            {
+                @Html.CheckBox("NewArrivals", true, new { htmlAttributes = new { @class = "form-control" } })
+            }
+            else
+            {
+                @Html.CheckBox("NewArrivals", false, new { htmlAttributes = new { @class = "form-control" } })
+            }
+            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-xl-2 col-lg-2 col-12 form-group">
+            <label>Polular</label>
+            @if (Model.PolularProducts == true)
+            {
+                @Html.CheckBox("PolularProducts", true, new { htmlAttributes = new { @class = "form-control" } })
+            }
+            else
+            {
+                @Html.CheckBox("PolularProducts", false, new { htmlAttributes = new { @class = "form-control" } })
+            }
+            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-xl-2 col-lg-2 col-12 form-group">
+            <label>Sale</label>
+            @if (Model.Sale == true)
+            {
+                @Html.CheckBox("Sale", true, new { htmlAttributes = new { @class = "form-control" } })
+            }
+            else
+            {
+                @Html.CheckBox("Sale", false, new { htmlAttributes = new { @class = "form-control" } })
+            }
+            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-xl-2 col-lg-2 col-12 form-group">
+            <label>Status</label>
+            @if (Model.Status == true)
+            {
+                @Html.CheckBox("Status", true, new { htmlAttributes = new { @class = "form-control" } })
+            }
+            else
+            {
+                @Html.CheckBox("Status", false, new { htmlAttributes = new { @class = "form-control" } })
+            }
+            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-lg-6 col-12 form-group">
+            <label>Upload Photo</label>
+            <input type="file" name="File" class="form-control-file">
+            <img src="@Url.Content(Model.ImgPath)" style="width:100px" />
+        </div>
+        <div class="col-xl-12 col-lg-12 col-12 form-group">
+            <label>Short Description</label>
+            @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-xl-12 col-lg-12 col-12 form-group">
+            <label>Long Description</label>
+            @Html.EditorFor(model => model.LongDescription, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.LongDescription, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-12 form-group mg-t-8">
+            <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
+            <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+        </div>
+    </div>
+        }
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

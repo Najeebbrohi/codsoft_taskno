@@ -1,0 +1,45 @@
+﻿@model EcoStore.Models.Role
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<!-- Breadcubs Area Start Here -->
+<div class="breadcrumbs-area">
+    <h3>Roles</h3>
+    <ul>
+        <li>
+            <a href="/Admin/Index">Home</a>
+        </li>
+        <li>Role</li>
+    </ul>
+</div>
+<!-- Breadcubs Area End Here -->
+<!-- Add New Teacher Area Start Here -->
+<div class="card height-auto">
+    <div class="card-body">
+        <div class="heading-layout1">
+            <div class="item-title">
+                <h3>Add New Role</h3>
+            </div>
+        </div>
+        @using (Html.BeginForm("Create", "Roles", FormMethod.Post, new { @class = "new-added-form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-xl-4 col-lg-6 col-12 form-group">
+                    <label>First Name</label>
+                    @Html.EditorFor(m => m.RoleName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name" } })
+                </div>
+
+                <div class="col-12 form-group mg-t-8">
+                    <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
+                    <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

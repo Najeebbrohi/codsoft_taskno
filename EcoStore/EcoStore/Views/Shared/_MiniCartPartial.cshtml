@@ -1,0 +1,29 @@
+﻿@if (Model != null && Model.Any())
+{
+    <ul class="minicart-product-list">
+        @foreach (var item in Model)
+        {
+            <li>
+                <a href="single-product.html" class="minicart-product-image">
+                    <img src="~/Content/FrontendAssets/images/product/small-size/3.jpg" alt="cart products">
+                </a>
+                <div class="minicart-product-details">
+                    <h6><a href="single-product.html">@item.ProductName</a></h6>
+                    <span>£@item.Price x @item.Qty</span>
+                </div>
+                <button class="close">
+                    <i class="fa fa-close"></i>
+                </button>
+            </li>
+        }
+    </ul>
+    <p class="minicart-total">SUBTOTAL: <span>£@Model.Sum(item => item.Price * item.Qty)</span></p>
+    <div class="minicart-button">
+        <a href="checkout.html" class="li-button li-button-dark li-button-fullwidth li-button-sm">
+            <span>View Full Cart</span>
+        </a>
+        <a href="checkout.html" class="li-button li-button-fullwidth li-button-sm">
+            <span>Checkout</span>
+        </a>
+    </div>
+}

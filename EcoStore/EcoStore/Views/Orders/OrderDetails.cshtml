@@ -1,0 +1,120 @@
+﻿@model EcoStore.Models.OrderDetail
+
+@{
+    ViewBag.Title = "OrderDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Breadcubs Area Start Here -->
+<div class="breadcrumbs-area">
+    <ul>
+        <li>
+            <a href="index.html">Home</a>
+        </li>
+        <li>Order Details</li>
+    </ul>
+</div>
+<!-- Breadcubs Area End Here -->
+<!-- Student Details Area Start Here -->
+<div class="card height-auto">
+    <div class="card-body">
+        <div class="heading-layout1">
+            <div class="item-title">
+                <h3>Order Details</h3>
+            </div>
+        </div>
+        <div class="single-info-details">
+            <div class="item-img">
+                @if (Url.Content(Model.Product.ImgPath) != null)
+                {
+                    <img src="@Url.Content(Model.Product.ImgPath)" style="width: 100px;" />
+                }
+            </div>
+            <div class="item-content">
+                <div class="header-inline item-header">
+                    <h3 class="text-dark-medium font-medium">Order Id : @Html.DisplayFor(model => model.OrderId)</h3>
+                    <div class="header-elements">
+                        <ul>
+                            <li><a href="#"><i class="fas fa-print"></i></a></li>
+                            <li><a href="#"><i class="fas fa-download"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-table table-responsive">
+                    <table class="table text-nowrap">
+                        <tbody>
+                            <tr>
+                                <td>Customer Name:</td>
+                                <td class="font-medium text-dark-medium">
+                                    @Html.DisplayFor(model => model.Order.FirstName) @Html.DisplayFor(model => model.Order.LastName)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Phone No:</td>
+                                <td class="font-medium text-dark-medium">
+                                    @Html.DisplayFor(model => model.Order.Phone)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Email Address:</td>
+                                <td class="font-medium text-dark-medium">
+                                    @Html.DisplayFor(model => model.Order.Email)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Address:</td>
+                                <td class="font-medium text-dark-medium">
+                                    @Html.DisplayFor(model => model.Order.Address), @Html.DisplayFor(model => model.Order.City), @Html.DisplayFor(model => model.Order.ZipCode), @Html.DisplayFor(model => model.Order.State), @Html.DisplayFor(model => model.Order.Country)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Order Date:</td>
+                                <td class="font-medium text-dark-medium">
+                                    @Html.DisplayFor(model => model.Order.OrderDate)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Order Time:</td>
+                                <td class="font-medium text-dark-medium">
+                                    @Html.DisplayFor(model => model.Order.OrderTime)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Order Status:</td>
+                                <td class="font-medium text-dark-medium">
+                                    @Html.DisplayFor(model => model.Order.OrderState)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Product Name:</td>
+                                <td class="font-medium text-dark-medium">
+                                    @Html.DisplayFor(model => model.Product.ProductName)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Price:</td>
+                                <td class="font-medium text-dark-medium">
+                                    @Html.DisplayFor(model => model.Price)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Quantity:</td>
+                                <td class="font-medium text-dark-medium">
+                                    @Html.DisplayFor(model => model.Qty)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Payment Method:</td>
+                                <td class="font-medium text-dark-medium">
+                                    @Html.DisplayFor(model => model.Order.Payment)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="@Url.Action("Index","Products")">Back to List</a>
+</div>

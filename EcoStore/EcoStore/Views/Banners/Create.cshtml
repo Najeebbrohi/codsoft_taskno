@@ -1,0 +1,70 @@
+﻿@model EcoStore.ViewModels.BannerViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Breadcubs Area Start Here -->
+<div class="breadcrumbs-area">
+    <ul>
+        <li>
+            <a href="/Admin/Index">Home</a>
+        </li>
+        <li>Banner</li>
+    </ul>
+</div>
+<!-- Breadcubs Area End Here -->
+<!-- Add New Teacher Area Start Here -->
+<div class="card height-auto">
+    <div class="card-body">
+        <div class="heading-layout1">
+            <div class="item-title">
+                <h3>Banner</h3>
+            </div>
+            @{
+                if (@ViewBag.Msg != null)
+                {
+                    <div class="alert alert-success">@ViewBag.Msg</div>
+                }
+                if (@ViewBag.ErrorMsg != null)
+                {
+                    <div class="alert alert-danger">@ViewBag.ErrorMsg</div>
+                }
+            }
+        </div>
+        @using (Html.BeginForm("Create", "Banners", FormMethod.Post, new { enctype = "multipart/form-data", @class = "new-added-form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+        <div class="col-xl-4 col-lg-6 col-12 form-group">
+            <label>Name</label>
+            @Html.EditorFor(m => m.BannerName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name" } })
+        </div>
+        <div class="col-xl-4 col-lg-6 col-12 form-group">
+            <label>Category</label>
+            @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="col-xl-2 col-lg-2 col-12 form-group">
+            <label>Status</label>
+            @Html.CheckBox("Status", false, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-lg-6 col-12 form-group">
+            <label>Upload Photo</label>
+            <input type="file" name="File" class="form-control-file">
+        </div>
+
+        <div class="col-12 form-group mg-t-8">
+            <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
+            <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+        </div>
+    </div>
+        }
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
